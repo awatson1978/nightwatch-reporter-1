@@ -13,11 +13,7 @@ meteor add velocity:nightwatch-reporter
 
 ======================
 #### Usage
-
-Click on the Status Icon Widget   
-![status-icon-widget](https://raw.githubusercontent.com/meteor-velocity/nightwatch-reporter/master/screenshots/status-icon-widget.jpg)
-
-======================
+ 
 Add Test Files  
 ![add-test-files](https://raw.githubusercontent.com/meteor-velocity/nightwatch-reporter/master/screenshots/add-test-files.jpg)
 
