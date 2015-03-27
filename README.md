@@ -14,7 +14,7 @@ meteor add velocity:nightwatch-reporter
 ======================
 #### Usage
  
-Simply run meteor as you normally wood.
+Simply run meteor as you normally would.
 
 ````
 meteor
