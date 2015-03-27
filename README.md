@@ -24,3 +24,10 @@ Click on Run Tests
 ======================
 Reset After Tests Have Run  
 ![test-passed](https://raw.githubusercontent.com/meteor-velocity/nightwatch-reporter/master/screenshots/tests-passed.png)
+
+
+
+===============================
+#### Licensing
+
+MIT License. Use as you wish, including for commercial purposes.
