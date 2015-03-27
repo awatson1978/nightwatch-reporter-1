@@ -7,9 +7,7 @@ Nightwatch specific HTML reporter for use with the [velocity](http://velocity.me
 
 ````sh
 meteor add velocity:nightwatch-framework
-
-cd packages
-git clone https://github.com/awatson1978/nightwatch-reporter
-
 meteor add velocity:nightwatch-reporter
 ````
+
+#### Usage
