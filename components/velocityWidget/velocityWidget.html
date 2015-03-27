@@ -1,0 +1,143 @@
+<body>
+  {{> velocity}}
+</body>
+
+<template name="velocity">
+  {{#if showVelocity}}
+    <div id="velocity-status-widget" class="{{statusWidgetClass}} display-toggle" data-target="velocityOverlay" title="Show test results">
+      <i class="velocity-icon-status"></i>
+    </div>
+
+    <div id="overlayResizeGrip" class="grip {{gripLocation}}"></div>
+    <div id="velocityOverlay" class="{{#if overlayIsVisible}}visible{{/if}} {{statusWidgetClass}} {{panelWidth}}">
+      <!-- <div class="velocity-logo">Velocity</div> -->
+      {{> velocityControlPanel}}
+
+      {{#if resetting}}
+        {{> velocityResetNotification}}
+      {{/if}}
+
+      <div class="velocity-summary-text">
+        {{#if anyFailed}}
+          {{totalFailedTestCount}} {{regularPlural totalFailedTestCount 'test' 's'}} failed
+        {{else}}
+          {{totalPassedTestCount}} {{regularPlural totalPassedTestCount 'test' 's'}} passed
+        {{/if}}
+      </div>
+
+
+      {{#each frameworks}}
+        {{> velocityReports}}
+      {{/each}}
+
+      {{#if active 'showLogs'}}
+        <div class="velocity-section-header">
+          <span class="velocity-section-name">Logs</span>
+        </div>
+        {{> velocityLogs}}
+      {{/if}}
+
+      {{#if active 'showFiles'}}
+        <div class="velocity-section-header">
+          <span class="velocity-section-name">Test files</span>
+        </div>
+        {{> velocityTestFiles}}
+      {{/if}}
+
+      <!-- {{#if mochaPresent}}
+      <div class="velocity-iframe {{#if active 'showMochaIframe'}}visible{{/if}}">
+        <div class="velocity-section-header">
+          <span class="velocity-section-name">Mocha iframe</span>
+        </div>
+        {{> mochaweb}}
+      </div>
+      {{/if}} -->
+    </div>
+  {{/if}}
+</template>
+
+
+
+
+<template name="velocityControlPanel">
+
+  <div class="velocity-options visible">
+    <button id="runNightwatchTests" class="btn-velocity">Run tests</button>
+    <button id="showSuccessful" class="btn-velocity control-toggle {{showActive 'showSuccessful'}}">Passing tests</button>
+    <button id="resetAll" class="btn-velocity">Reset</button>
+    <button id="showLogs" class="btn-velocity control-toggle {{showActive 'showLogs'}}">Logs</button>
+    <button id="showFiles" class="btn-velocity control-toggle {{showActive 'showFiles'}}">Files</button>
+    <i class="velocity-icon-status display-toggle" data-target="velocityOverlay"></i>
+
+  </div>
+</template>
+
+
+<template name="velocityLogs">
+  <div class="velocity-table-box">
+    <table id="velocityLogs" class="velocity-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Level</th>
+          <th>Message</th>
+          <th>Framework</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each logs}}
+        {{> velocityLog}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<template name="velocityLog">
+  <tr class="{{result}}">
+    <td>{{timestamp}}</td>
+    <td>{{level}}</td>
+    <td>{{message}}</td>
+    <td>{{framework}}</td>
+  </tr>
+</template>
+
+<template name="velocityTestFiles">
+  <div class="velocity-table-box">
+    <table id="velocityTestFiles" class="velocity-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Relative Path</th>
+          <th>Target Framework</th>
+          <th>Last Modified</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each testFiles}}
+        {{> velocityTestFile}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</template>
+
+<template name="velocityTestFile">
+  <tr class="{{result}}">
+    <td>{{_id}}</td>
+    <td>{{relativePath}}</td>
+    <td>{{targetFramework}}</td>
+    <td>{{lastModified}}</td>
+  </tr>
+</template>
+
+<template name="velocityResetNotification">
+  <div id="velocityResetNotification">
+      <div class="velocity-notice-inline">
+        <div class="velocity-section-header">
+          <span class="velocity-section-name">Please wait</span>
+        </div>
+        <p>Velocity is updating your files.</p>
+      </div>
+  </div>
+</template>

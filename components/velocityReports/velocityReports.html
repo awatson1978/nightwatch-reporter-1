@@ -1,0 +1,66 @@
+<template name="velocityReports">
+  <section class="velocity-report {{frameworkStatus}}">
+
+    {{#unless frameworkTotalTestCount}}
+      {{#if noFrameworkFiles}}
+      <div class="velocity-notice-inline">
+        <p>It appears that you don't have any tests for this framework. Would you like to add some?</p>
+        <button class="btn-velocity copy-sample-tests">Add {{name}} sample tests</button>
+      </div>
+      {{else}}
+        {{#if isLaunchingFramework}}
+            <div class="velocity-loading">
+              <i class="fa fa-spinner fa-spin gray"></i>
+              <p>
+                Launching
+              </p>
+            </div>
+        {{else}}
+          <div class="velocity-loading">
+            <i class="velocity-icon-loading"></i>
+            <p>Loading</p>
+          </div>
+        {{/if}}
+      {{/if}}
+    {{/unless}}
+
+    {{#each suites}}
+        {{#if suiteNotHidden}}
+          <div class="velocity-suite {{suiteStatus}}">
+            <ul class="list-unstyled velocity-result-list">
+              {{#each reports}}
+                {{#if reportNotHidden}}
+                  <li class="velocity-test {{#if failed}}failed{{else}}passed{{/if}}">
+                    {{#if suiteInfo}}
+                      <div class="velocity-suite-header">
+                        <span class="velocity-suite-name darkgray">{{name}}</span>
+                      </div>
+                    {{else}}
+                      {{#if sectionBreak}}
+                        <hr class="no-lower-margin">
+                      {{/if}}
+                      {{#if sectionInfo}}
+                        <span class="velocity-section-name">{{name}}</span>
+                        <br>
+                        <br>
+                      {{/if}}
+                      {{#if testResult}}
+                        <span class="velocity-test-name">
+                          {{#if failed}}
+                            <span class="failed">✖</span>
+                          {{else}}
+                            <span class="passed">✔</span>
+                          {{/if}}
+                          {{name}}
+                        </span>
+                      {{/if}}
+                    {{/if}}
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ul>
+          </div>
+        {{/if}}
+    {{/each}}
+  </section>
+</template>
